@@ -25,6 +25,23 @@ const readGames = () => {
     return iou;
 }
 
+const createProduct = (product) => {
+    const iou = new Promise((resolve, reject) => {
+        MongoClient.connect(url, options, (err, client) => {
+            assert.equal(err, null);
+            const db = client.db(db_name);
+            const collection = db.collection(col_name);
+            collection.insertOne(product, (err, result) => {
+                assert.equal(err, null);
+                resolve(result.ops[0]);
+                client.close();
+            });
+        });
+    });
+    return iou; // I Owe You
+}
+
 module.exports = {
-    readGames
+    readGames,
+    createProduct
 }

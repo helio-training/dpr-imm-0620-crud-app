@@ -7,6 +7,7 @@ const {
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
     const data = await readGames();
+    console.log(data);
     res.send(data);
 });
 
