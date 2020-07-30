@@ -1,5 +1,6 @@
 import React from 'react';
 import Game from './Game';
+import CreateGame from './CreateGame';
 
 class Games extends React.Component {
     // Track this.state
@@ -20,9 +21,12 @@ class Games extends React.Component {
     render() {
         const displayGames = this.state.games.map(game => <Game key={game._id} game={game}/>);
         return (
-            <ul>
-                {displayGames}
-            </ul>
+            <>
+                <CreateGame refresh={this.getGames}/>
+                <ul>
+                    {displayGames}
+                </ul>
+            </>
         )
     }
 
