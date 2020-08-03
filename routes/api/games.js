@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {
     readGames, 
-    createGame
+    createGame,
+    deleteGame
 } = require('../../data/games');
 
 /* GET users listing. */
@@ -20,6 +21,12 @@ router.post('/', async function(req, res) {
     // Send the results 
     res.send(data);
     // res.send(await createGame(req.body));
-})
+});
+
+router.delete('/:id', async function (req, res) {
+    const data = await deleteGame(req.params.id);
+    console.log(data);
+    res.send(data);
+});
 
 module.exports = router;
