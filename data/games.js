@@ -98,8 +98,8 @@ const deleteGame = (id) => {
 }
 
 module.exports = {
-    readGames,
     createGame,
+    readGames,
     upsertGame,
     deleteGame
 }
