@@ -3,12 +3,17 @@ import Game from './Game';
 import CreateGame from './CreateGame';
 
 class Games extends React.Component {
-    // Track this.state
-    state = {
-        games: [ ]
+    constructor(props){
+        super(props);
+        this.state = {
+            games: []
+        }
+        this.getGames = this.getGames.bind(this);
     }
+    // Track this.state
+    
     // componentDidMount() calls a function to fetch()
-    getGames = () => {
+    getGames () {
         const api_url = process.env.REACT_APP_API_URL;
         fetch(`${api_url}/games`)
             .then(response => response.json())
@@ -17,9 +22,26 @@ class Games extends React.Component {
     componentDidMount(){
         this.getGames();
     }
+    deleteGame(id, refresh) {
+        const api_url = process.env.REACT_APP_API_URL;
+        fetch(`${api_url}/games/${id}`,{
+            method: "DELETE"
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                refresh();
+            })
+    }
     // render() list of Games
     render() {
-        const displayGames = this.state.games.map(game => <Game key={game._id} game={game}/>);
+        const displayGames = this.state.games.map(game => 
+            // Game(game, deleteGame, refresh)
+            <Game 
+                key={game._id} 
+                game={game}
+                deleteGame={this.deleteGame}
+                refresh={this.getGames}/>
+        );
         return (
             <>
                 <CreateGame refresh={this.getGames}/>

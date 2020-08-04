@@ -8,6 +8,10 @@ form {
   margin: 0 35%;
 }
 
+.del-btn {
+  color: red;
+}
+
 .App {
   text-align: center;
 }

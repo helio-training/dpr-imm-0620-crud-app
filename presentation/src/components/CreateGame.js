@@ -53,7 +53,7 @@ export default class CreateGame extends React.Component {
                         value={platform}
                         onChange={(event) => this.handlePlatformsChange(event, index)} 
                         required/>
-                    <input class="remove-platform"
+                    <input className="remove-platform"
                         type="button"
                         value="-"
                         onClick={()=> this.removePlatform(index)}/>
